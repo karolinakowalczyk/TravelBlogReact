@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../../userContext";
 
 const Login = () => {
   const {
@@ -9,12 +13,25 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const [user, setUser] = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorCode, setErrorCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const login = (data) => {
-    console.log("login");
-    console.log(data);
+  const navigate = useNavigate();
+
+  const login = async () => {
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setUser(userCredential.user);
+        localStorage.setItem("user", user.accessToken);
+        navigate("/");
+      })
+      .catch((error) => {
+        setErrorCode(error.code);
+        setErrorMessage(error.message);
+      });
   };
 
   return (
