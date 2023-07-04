@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Register = () => {
   const {
@@ -12,10 +15,19 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorCode, setErrorCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-  const signUp = (data) => {
-    console.log("register");
-    console.log(data);
+  const signUp = async () => {
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        setErrorCode(error.code);
+        setErrorMessage(error.message);
+      });
   };
 
   return (
@@ -61,7 +73,7 @@ const Register = () => {
             className="form-control"
             type="password"
             value={confirmPassword}
-            {...register("password", {
+            {...register("cofirmPassword", {
               required: "This field is required.",
               onChange: (e) => {
                 e.preventDefault();
