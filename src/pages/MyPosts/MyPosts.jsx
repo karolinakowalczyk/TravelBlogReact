@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { auth, db } from "../../firebase";
+import { auth, db, storage } from "../../firebase";
 import { collection, getDocs, where, query } from "firebase/firestore";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const displayPosts = posts.map((post, index) => (
     <div className="card m-3 my-post-card" key={index}>
-      {post.image ? (
+      {console.log(post)}
+      {post.imageUrl ? (
         <img className="card-img-top" src={post.image} alt="post img" />
       ) : (
         <img
@@ -32,31 +34,45 @@ const MyPosts = () => {
   ));
 
   const fetchMyPost = async () => {
-    const res = [];
-    console.log(auth.currentUser);
-    //na początku auth.currentUser też jest null
+    const postsData = [];
+    auth.onAuthStateChanged(async (currentUser) => {
+      if (currentUser) {
+        await getDocs(
+          query(
+            collection(db, "posts"),
+            where("userId", "==", auth.currentUser.uid)
+          )
+        ).then((userPosts) => {
+          const imgUrls = [];
+          userPosts.forEach((post) => {
+            if (post.data().image.length > 0) {
+              const storageRef = ref(storage, `images/${post.data().image}`);
+              const uploadTask = uploadBytesResumable(storageRef, post);
 
-    await getDocs(
-      query(
-        collection(db, "posts"),
-        where("userId", "==", "gYZseG32rRNRgatJNmbqW07a4Nz1")
-      )
-    ).then((userPosts) =>
-      userPosts.forEach((post) => {
-        res.push({
-          id: post.id,
-          ...post.data(),
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                imgUrls.push(downloadURL);
+              });
+            } else {
+              imgUrls.push("");
+            }
+            postsData.push({
+              id: post.id,
+              ...post.data(),
+            });
+          });
         });
-      })
-    );
-    console.log(res);
 
-    return res;
+        setLoading(false);
+      }
+    });
+
+    setPosts(postsData);
   };
 
   useEffect(() => {
     fetchMyPost();
   }, []);
+
   return (
     <div className="container d-flex flex-column align-items-center">
       <h1>My Posts</h1>
@@ -65,7 +81,11 @@ const MyPosts = () => {
           Add new post
         </Link>
       </button>
-      {posts && <div className="d-flex flex-wrap">{displayPosts}</div>}
+      {loading ? (
+        <div className="spinner-border" role="status"></div>
+      ) : (
+        displayPosts
+      )}
     </div>
   );
 };
