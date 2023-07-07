@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { auth, db, storage } from "../../firebase";
 import { collection, getDocs, where, query } from "firebase/firestore";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { ref, getDownloadURL } from "firebase/storage";
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [urlloading, setUrlLoading] = useState(false);
+  const [url, setUrl] = useState("");
 
   const displayPosts = posts.map((post, index) => (
     <div className="card m-3 my-post-card" key={index}>
-      {console.log(post)}
-      {post.imageUrl ? (
+      {post.image ? (
         <img className="card-img-top" src={post.image} alt="post img" />
       ) : (
         <img
@@ -33,8 +34,13 @@ const MyPosts = () => {
     </div>
   ));
 
+  const getImage = async (location) => {
+    return await getDownloadURL(ref(storage, location));
+  };
+
   const fetchMyPost = async () => {
     const postsData = [];
+
     auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
         await getDocs(
@@ -43,27 +49,41 @@ const MyPosts = () => {
             where("userId", "==", auth.currentUser.uid)
           )
         ).then((userPosts) => {
-          const imgUrls = [];
-          userPosts.forEach((post) => {
-            if (post.data().image.length > 0) {
-              const storageRef = ref(storage, `images/${post.data().image}`);
-              const uploadTask = uploadBytesResumable(storageRef, post);
-
-              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                imgUrls.push(downloadURL);
+          const urlArr = [];
+          userPosts.forEach(async (post, index) => {
+            if (post.data().image) {
+              setUrlLoading(true);
+              getImage(`images/${post.data().image}`).then((imgurl) => {
+                //post.data().image = imgurl;
+                setUrl(imgurl);
+                //why is it not with new value...?
+                //console.log(post.data().image);
+                //console.log(imgurl);
+                setUrlLoading(false);
               });
             } else {
-              imgUrls.push("");
+              setUrlLoading(true);
+              //post.data().image = "";
+              setUrl("");
+              setUrlLoading(false);
             }
-            postsData.push({
-              id: post.id,
-              ...post.data(),
-            });
+            if (!urlloading) {
+              postsData.push({
+                id: post.id,
+                author: post.data().author,
+                content: post.data().content,
+                hashtags: post.data().hashtags,
+                image: url,
+                title: post.data().title,
+                userId: post.data().userId,
+                //...post.data(),
+              });
+            }
           });
         });
-
-        setLoading(false);
       }
+
+      setLoading(false);
     });
 
     setPosts(postsData);

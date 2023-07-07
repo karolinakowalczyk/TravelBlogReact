@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./AddPost.css";
+import { auth, db } from "../../firebase";
 import { useForm } from "react-hook-form";
+import { collection, addDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const AddPost = () => {
   const {
@@ -10,16 +13,33 @@ const AddPost = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const [file, setFile] = useState("");
   const [fileUrl, setFileUrl] = useState("");
   const [hashtag, setHashtag] = useState("");
+  const [errorCode, setErrorCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const addPost = (data) => {
-    console.log("add post");
-    console.log(data);
+  const addPost = async () => {
+    await addDoc(collection(db, "posts"), {
+      userId: auth.currentUser.uid,
+      title: title,
+      author: author,
+      content: content,
+      hashtags: [],
+      image: "",
+    })
+      .then(() => {
+        navigate("/my-posts");
+      })
+      .catch((error) => {
+        setErrorCode(error.code);
+        setErrorMessage(error.message);
+      });
   };
   return (
     <div className="container">
@@ -102,15 +122,19 @@ const AddPost = () => {
           )}
         </div>
         <div className="form-group py-2">
-          <label htmlFor="hashtag">Hashtags:</label>
+          <label htmlFor="hashtag">Hashtags: </label>
           <input
-            value={hashtag}
             className="form-control"
+            id="hashtag"
+            value={hashtag}
             type="text"
-            id="hashtag-input"
-            {...register("hashtag")}
+            {...register("hashtag", {
+              onChange: (e) => {
+                e.preventDefault();
+                setHashtag(e.target.value);
+              },
+            })}
           />
-          <div className="d-flex flex-row flex-wrap hashtags-container"></div>
         </div>
         <button
           type="submit"
