@@ -2,6 +2,32 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Heroku deployment
+
+Need to change in package.json this code:
+
+```
+"scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+},
+```
+
+For this code:
+
+```
+"scripts": {
+    " dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
+},
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
