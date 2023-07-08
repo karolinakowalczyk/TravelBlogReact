@@ -1,8 +1,20 @@
+import { useContext } from "react";
+import UserContext from "../../userContext";
 import "./Home.css";
 import VeneziaLandscape from "../../assets/images/pexels-jarod-barton.jpg";
 import GirlWithSuitcase from "../../assets/images/pexels-tranmautritam.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const [user, setUser] = useContext(UserContext);
+  const navigate = useNavigate();
+  const explore = () => {
+    if (user) {
+      navigate("/my-posts");
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <div>
       <img
@@ -26,7 +38,9 @@ const Home = () => {
             You're travel lover? It's perfect place for you! This blog is about
             my travel experiences and tips. Do you want to join this trip?
           </p>
-          <button className="p-3 mt-5 main-btn">Expole the Blog</button>
+          <button className="p-3 mt-5 main-btn" onClick={explore}>
+            Expole the Blog
+          </button>
         </div>
       </div>
     </div>

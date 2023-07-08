@@ -64,7 +64,7 @@ const Layout = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/"} className="nav-link" href="#">
+              <Link to={"/"} className="nav-link">
                 Contact
               </Link>
             </li>
