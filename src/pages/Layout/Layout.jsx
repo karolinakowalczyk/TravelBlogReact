@@ -58,16 +58,6 @@ const Layout = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to={"/"} className="nav-link">
-                About
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/"} className="nav-link">
-                Contact
-              </Link>
-            </li>
             {isAuth && (
               <li className="nav-item">
                 <Link to={"/my-posts"} className="nav-link">

@@ -101,7 +101,7 @@ const MyPosts = () => {
           Add new post
         </Link>
       </button>
-      <div class="d-flex flex-wrap">
+      <div className="d-flex flex-wrap">
         {loading ? (
           <div className="spinner-border" role="status"></div>
         ) : (
