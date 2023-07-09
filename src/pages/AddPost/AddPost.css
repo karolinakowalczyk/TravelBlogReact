@@ -1,12 +1,12 @@
 @import ".././../App.css";
 
 .hashtag-btn {
-    pointer-events: all;
-    cursor: pointer;
     margin-left: 0.25em;
+    margin-right: 0.25em;
     padding: 0.1em;
     background-color: var(--primary);
     color: white;
+    border-width: 0;
 }
 
 

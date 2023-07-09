@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { auth, db, storage } from "../../firebase";
 import { collection, getDocs, where, query } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
+import NoImage from "../../assets/images/no-image-icon.png";
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -15,16 +16,16 @@ const MyPosts = () => {
       {post.image ? (
         <img className="card-img-top" src={post.image} alt="post img" />
       ) : (
-        <img
-          className="card-img-top"
-          src="https://img.icons8.com/ios-filled/50/null/no-image.png"
-          alt="post no img"
-        />
+        <img className="card-img-top" src={NoImage} alt="post no img" />
       )}
       <div className="card-body d-flex flex-column">
         <h5 className="card-title">{post.title}</h5>
         <p className="card-text">{post.author}</p>
-
+        {post.hashtags.map((hashtag, index) => (
+          <p key={index} className="card-text">
+            #{hashtag}
+          </p>
+        ))}
         <button className="main-btn p-1 mt-auto">
           <Link to={"/"} className="main-href">
             See post
@@ -101,7 +102,7 @@ const MyPosts = () => {
           Add new post
         </Link>
       </button>
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap justify-content-center">
         {loading ? (
           <div className="spinner-border" role="status"></div>
         ) : (

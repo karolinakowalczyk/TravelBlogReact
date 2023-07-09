@@ -1,15 +1,12 @@
-import { useContext } from "react";
-import UserContext from "../../userContext";
 import "./Home.css";
 import VeneziaLandscape from "../../assets/images/pexels-jarod-barton.jpg";
 import GirlWithSuitcase from "../../assets/images/pexels-tranmautritam.jpg";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [user, setUser] = useContext(UserContext);
   const navigate = useNavigate();
   const explore = () => {
-    if (user) {
+    if (localStorage.getItem("user")) {
       navigate("/my-posts");
     } else {
       navigate("/login");
