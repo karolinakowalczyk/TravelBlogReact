@@ -47,13 +47,9 @@ const AddPost = () => {
   };
 
   const addPost = async () => {
-    console.log(hashtags);
-
-    //check if it's safe
     if (fileName !== "") {
       const imageRef = ref(storage, `images/${fileName}`);
       await uploadBytes(imageRef, file).then(() => {
-        console.log("image uploaded");
         addPostDoc();
       });
     } else {
@@ -86,7 +82,6 @@ const AddPost = () => {
   };
 
   const removeHashtag = (e) => {
-    console.log(hashtags);
     let currentHashtags = [...hashtags];
     currentHashtags.splice(currentHashtags.indexOf(e.currentTarget.id), 1);
     setHashtags(currentHashtags);
