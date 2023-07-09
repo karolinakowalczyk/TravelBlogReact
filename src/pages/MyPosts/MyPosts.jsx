@@ -101,11 +101,13 @@ const MyPosts = () => {
           Add new post
         </Link>
       </button>
-      {loading ? (
-        <div className="spinner-border" role="status"></div>
-      ) : (
-        displayPosts
-      )}
+      <div class="d-flex flex-wrap">
+        {loading ? (
+          <div className="spinner-border" role="status"></div>
+        ) : (
+          displayPosts
+        )}
+      </div>
     </div>
   );
 };
