@@ -2,6 +2,7 @@ import "./Home.css";
 import VeneziaLandscape from "../../assets/images/pexels-jarod-barton.jpg";
 import GirlWithSuitcase from "../../assets/images/pexels-tranmautritam.jpg";
 import { useNavigate } from "react-router-dom";
+import SeoHeader from "../../components/SeoHeader/SeoHeader.jsx";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,6 +15,12 @@ const Home = () => {
   };
   return (
     <div>
+      <SeoHeader
+        title={"Travel Blog React - 360 Travel Inspirations"}
+        description={
+          "Discover the most interesting corners of the world on Travel Blog. Where are the cheap flights now, and where are the most beutiful views?"
+        }
+      ></SeoHeader>
       <img
         src={VeneziaLandscape}
         className="main-image"
@@ -29,7 +36,7 @@ const Home = () => {
         </div>
         <div className="half second d-flex flex-column justify-content-center">
           <h1>
-            WELCOME TO <br /> 360 <span>&#176;</span> TRAVEL <br /> INSPIRATIONS
+            <br /> 360 <span>&#176;</span> TRAVEL <br /> INSPIRATIONS
           </h1>
           <p className="mt-5">
             You're travel lover? It's perfect place for you! This blog is about

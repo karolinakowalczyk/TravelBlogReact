@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import SeoHeader from "../../components/SeoHeader/SeoHeader.jsx";
 
 const Register = () => {
   const {
@@ -32,6 +33,12 @@ const Register = () => {
 
   return (
     <div className="container">
+      <SeoHeader
+        title={"Travel Blog Flask - Register Page"}
+        description={
+          "Are you new? Create an account and share your travel inspitations!"
+        }
+      ></SeoHeader>
       <h1 className="pb-2 page-header">Register</h1>
       <form onSubmit={handleSubmit(signUp)}>
         <div className="form-group py-2">

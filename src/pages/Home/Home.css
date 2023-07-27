@@ -46,6 +46,10 @@ h1 {
     padding: 1rem;
 }
 
+.content-div {
+    margin-top: 20px;
+}
+
 @media screen and (max-width: 768px) {
     .content-div {
         flex-direction: column-reverse;

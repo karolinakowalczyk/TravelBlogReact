@@ -4,6 +4,7 @@ import { auth, db, storage } from "../../firebase";
 import { collection, getDocs, where, query } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 import NoImage from "../../assets/images/no-image-icon.png";
+import SeoHeader from "../../components/SeoHeader/SeoHeader.jsx";
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -96,6 +97,10 @@ const MyPosts = () => {
 
   return (
     <div className="container d-flex flex-column align-items-center">
+      <SeoHeader
+        title={"Travel Blog React - Posts"}
+        description={"On this page you can check your awsome added posts."}
+      ></SeoHeader>
       <h1>My Posts</h1>
       <button className="main-btn p-3">
         <Link to={"/add-post"} className="main-href">

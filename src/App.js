@@ -1,4 +1,5 @@
 import "./App.css";
+import Footer from "./components/Footer/Footer.jsx";
 import Layout from "./pages/Layout/Layout.jsx";
 import MainRoute from "./router/MainRoute.jsx";
 import UserContext from "./userContext";
@@ -9,10 +10,13 @@ const App = () => {
 
   return (
     <UserContext.Provider value={[user, setUser]}>
-      <div>
+      <div id="body-content">
         <Layout />
-        <MainRoute />
+        <div id="site-body">
+          <MainRoute />
+        </div>
       </div>
+      <Footer />
     </UserContext.Provider>
   );
 };

@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../userContext";
+import SeoHeader from "../../components/SeoHeader/SeoHeader.jsx";
 
 const Login = () => {
   const {
@@ -36,6 +37,12 @@ const Login = () => {
 
   return (
     <div className="container">
+      <SeoHeader
+        title={"Travel Blog React - Login Page"}
+        description={
+          "Welcome back! Login to your Travel Blog React account and add new travel inspitation."
+        }
+      ></SeoHeader>
       <h1 className="pb-2 page-header">Login</h1>
       <form onSubmit={handleSubmit(login)}>
         <div className="form-group py-2">
