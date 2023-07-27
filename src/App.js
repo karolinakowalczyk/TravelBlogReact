@@ -4,20 +4,23 @@ import Layout from "./pages/Layout/Layout.jsx";
 import MainRoute from "./router/MainRoute.jsx";
 import UserContext from "./userContext";
 import { useState } from "react";
+import HttpsRedirect from "react-https-redirect";
 
 const App = () => {
   const [user, setUser] = useState(null);
 
   return (
-    <UserContext.Provider value={[user, setUser]}>
-      <div id="body-content">
-        <Layout />
-        <div id="site-body">
-          <MainRoute />
+    <HttpsRedirect>
+      <UserContext.Provider value={[user, setUser]}>
+        <div id="body-content">
+          <Layout />
+          <div id="site-body">
+            <MainRoute />
+          </div>
         </div>
-      </div>
-      <Footer />
-    </UserContext.Provider>
+        <Footer />
+      </UserContext.Provider>
+    </HttpsRedirect>
   );
 };
 
