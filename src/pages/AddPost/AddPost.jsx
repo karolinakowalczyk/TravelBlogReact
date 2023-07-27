@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import SeoHeader from "../../components/SeoHeader/SeoHeader.jsx";
+
 import { v4 } from "uuid";
 
 const AddPost = () => {
@@ -99,13 +100,12 @@ const AddPost = () => {
 
   return (
     <div className="container">
-      <Helmet>
-        <title>Travel Blog Flask - Add New Post</title>
-        <meta
-          name="description"
-          content="Where did you go last time? Share your travel experience and add new post!"
-        />
-      </Helmet>
+      <SeoHeader
+        title={"Travel Blog React - Add New Post"}
+        description={
+          "Where did you go last time? Share your travel experience and add new post!"
+        }
+      ></SeoHeader>
       <h1 className="pb-2 page-header">Add Post</h1>
       <form onSubmit={handleSubmit(addPost)}>
         <div className="form-group py-2">
