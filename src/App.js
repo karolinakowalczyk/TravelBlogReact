@@ -3,10 +3,13 @@ import "./App.css";
 import UserContext from "./userContext";
 import { useState } from "react";
 import HttpsRedirect from "react-https-redirect";
+import MainRoute from "./router/MainRoute.jsx";
+import Layout from "./pages/Layout/Layout";
+import Footer from "./components/Footer/Footer";
 
-const Layout = lazy(() => import("./router/MainRoute.jsx"));
-const MainRoute = lazy(() => import("./pages/Layout/Layout.jsx"));
-const Footer = lazy(() => import("../components/Footer/Footer.jsx"));
+//const Layout = lazy(() => import("./router/MainRoute.jsx"));
+//const MainRoute = lazy(() => import("./pages/Layout/Layout.jsx"));
+//const Footer = lazy(() => import("./components/Footer/Footer.jsx"));
 
 const App = () => {
   const [user, setUser] = useState(null);
