@@ -64,7 +64,7 @@ const Home = () => {
             You're travel lover? It's perfect place for you! This blog is about
             my travel experiences and tips. Do you want to join this trip?
           </p>
-          <p className="fw-bold">Discover a World of Adventures:</p>
+          <p class="fw-bold">Discover a World of Adventures:</p>
           <p>
             At TravelBlog, we believe that travel is not just a hobby; it&apos;s
             a way of life. Our travel blog showcases a diverse range of
@@ -74,7 +74,7 @@ const Home = () => {
             retreats, our blog offers a vast array of travel guides and
             itineraries to suit every explorer&apos;s taste.
           </p>
-          <p className="fw-bold">Immerse Yourself in Engaging Narratives:</p>
+          <p class="fw-bold">Immerse Yourself in Engaging Narratives:</p>
           <p>
             We pride ourselves on our engaging storytelling, which brings
             destinations to life through the eyes of passionate globetrotters.
@@ -84,7 +84,7 @@ const Home = () => {
             encounters with local communities to thrilling anecdotes of wildlife
             encounters, our blog ensures that you are a part of every adventure.
           </p>
-          <p className="fw-bold">Inspiring Photography:</p>
+          <p class="fw-bold">Inspiring Photography:</p>
           <p>
             A picture is worth a thousand words, and at TravelBlog.com, we
             curate stunning visual experiences to complement our narratives.
@@ -94,7 +94,7 @@ const Home = () => {
             you are standing atop ancient ruins, strolling through bustling
             markets, or gazing at magnificent sunsets.
           </p>
-          <p className="fw-bold">Expert Tips and Travel Hacks:</p>
+          <p class="fw-bold">Expert Tips and Travel Hacks:</p>
           <p>
             As avid globetrotters ourselves, we know that planning a trip can be
             both exciting and daunting. That&apos;s why our travel blog goes
@@ -103,7 +103,7 @@ const Home = () => {
             the best accommodation deals, packing like a pro, or navigating
             through foreign customs, we&apos;ve got you covered.
           </p>
-          <p className="fw-bold">Join Our Thriving Travel Community:</p>
+          <p class="fw-bold">Join Our Thriving Travel Community:</p>
           <p>
             TravelBlog.com isn&apos;t just a blog; it&apos;s a vibrant community
             of fellow travelers. Engage with our passionate readers and
