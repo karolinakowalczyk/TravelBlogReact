@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, lazy } from "react";
 import "./AddPost.css";
 import { auth, db, storage } from "../../firebase";
 import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
-import SeoHeader from "../../components/SeoHeader/SeoHeader.jsx";
-
 import { v4 } from "uuid";
+
+const SeoHeader = lazy(() =>
+  import("../../components/SeoHeader/SeoHeader.jsx")
+);
 
 const AddPost = () => {
   const {

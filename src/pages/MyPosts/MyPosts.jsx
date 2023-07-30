@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy } from "react";
 import { Link } from "react-router-dom";
 import { auth, db, storage } from "../../firebase";
 import { collection, getDocs, where, query } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 import NoImage from "../../assets/images/no-image-icon.png";
-import SeoHeader from "../../components/SeoHeader/SeoHeader.jsx";
+
+const SeoHeader = lazy(() =>
+  import("../../components/SeoHeader/SeoHeader.jsx")
+);
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);

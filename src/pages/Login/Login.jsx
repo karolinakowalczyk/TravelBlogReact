@@ -1,10 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, lazy } from "react";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../userContext";
-import SeoHeader from "../../components/SeoHeader/SeoHeader.jsx";
+
+const SeoHeader = lazy(() =>
+  import("../../components/SeoHeader/SeoHeader.jsx")
+);
 
 const Login = () => {
   const {

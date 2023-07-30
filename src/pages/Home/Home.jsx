@@ -1,3 +1,4 @@
+import React, { lazy } from "react";
 import "./Home.css";
 import VeneziaLandscape from "../../assets/images/pexels-jarod-barton/pexels-jarod-barton.webp";
 import VeneziaLandscape300 from "../../assets/images/pexels-jarod-barton/pexels-jarod-barton_300.webp";
@@ -19,7 +20,10 @@ import GirlWithSuitcase1930 from "../../assets/images/pexels-tranmautritam/pexel
 import GirlWithSuitcase2048 from "../../assets/images/pexels-tranmautritam/pexels-tranmautritam_2048.webp";
 
 import { useNavigate } from "react-router-dom";
-import SeoHeader from "../../components/SeoHeader/SeoHeader.jsx";
+
+const SeoHeader = lazy(() =>
+  import("../../components/SeoHeader/SeoHeader.jsx")
+);
 
 const Home = () => {
   const navigate = useNavigate();
