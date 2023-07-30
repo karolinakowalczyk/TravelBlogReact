@@ -22,7 +22,7 @@ const Footer = () => {
         href="https://github.com/karolinakowalczyk/TravelBlogReact"
         rel="noreferrer"
       >
-        <img src={GitHubIcon} alt="github icon" width="24" height="24" />
+        <img src={GitHubIcon} alt="github icon" />
       </a>
     </footer>
   );
