@@ -49,6 +49,7 @@ const Home = () => {
         width="4088"
         height="3066"
         srcSet={`${VeneziaLandscape300} 300w, ${VeneziaLandscape950} 950w, ${VeneziaLandscape1320} 1320w, ${VeneziaLandscape1600} 1600w, ${VeneziaLandscape1840} 1840w, ${VeneziaLandscape2048} 2048w`}
+        sizes="100vw"
       />
       <div className="d-flex content-div">
         <div className="half cropped">
@@ -59,6 +60,7 @@ const Home = () => {
             width="2725"
             height="4088"
             srcSet={`${GirlWithSuitcase300} 300w, ${GirlWithSuitcase720} 720w, ${GirlWithSuitcase980} 980w, ${GirlWithSuitcase1180} 1180w, ${GirlWithSuitcase1350} 1350w, ${GirlWithSuitcase1500} 1500w ${GirlWithSuitcase1650} 1650w, ${GirlWithSuitcase1800} 1800w, ${GirlWithSuitcase1930} 1930w, ${GirlWithSuitcase2048} 2048w`}
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
         <div className="half second d-flex flex-column justify-content-center">
