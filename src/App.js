@@ -3,6 +3,7 @@ import "./App.css";
 import UserContext from "./userContext";
 import { useState } from "react";
 import HttpsRedirect from "react-https-redirect";
+import Loading from "./components/Loading/Loading";
 
 const Layout = lazy(() => import("./router/MainRoute.jsx"));
 const MainRoute = lazy(() => import("./pages/Layout/Layout.jsx"));
@@ -14,7 +15,7 @@ const App = () => {
   return (
     <HttpsRedirect>
       <UserContext.Provider value={[user, setUser]}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <div id="body-content">
             <Layout />
             <div id="site-body">

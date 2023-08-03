@@ -1,0 +1,9 @@
+.spinner-border {
+    margin-top: 200px
+}
+
+.navbar .navbar-brand {
+    color: var(--primary);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.375rem;
+}
