@@ -14,9 +14,11 @@ const MyPosts = () => {
   const [loading, setLoading] = useState(true);
   const [urlloading, setUrlLoading] = useState(false);
   const [url, setUrl] = useState("");
+  const [allPosts, setAllPosts] = useState([]);
 
   const displayPosts = posts.map((post, index) => (
     <div className="card m-3 my-post-card" key={index}>
+      {console.log(allPosts)}
       {post.image ? (
         <img className="card-img-top" src={post.image} alt="post img" />
       ) : (
@@ -94,8 +96,25 @@ const MyPosts = () => {
     setPosts(postsData);
   };
 
+  const fetchAllPosts = async () => {
+    const postsData = [];
+
+    await getDocs(collection(db, "posts"))
+      .then((res) => {
+        res.forEach((doc) => {
+          postsData.push(doc.data().title);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setAllPosts(postsData);
+  };
+
   useEffect(() => {
     fetchMyPost();
+    //fetchAllPosts();
   }, []);
 
   return (
